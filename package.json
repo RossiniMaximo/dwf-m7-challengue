@@ -1,0 +1,31 @@
+{
+  "name": "desafio-m7",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev:be": "nodemon --watch ./be-src/index.ts --exec ts-node ./be-src/index.ts",
+    "dev:fe": "parcel serve ./fe-src/index.html",
+    "build:front": "parcel build./fe-src/index.html",
+    "build:api": "tsc ./be-src/index.ts",
+    "build": "yarn build:front && yarn build:api",
+    "start": "node ./be.src/index.ts",
+    "sync": "ts-node ./be-src/sync.ts"
+  },
+  "dependencies": {
+    "@sendgrid/mail": "^7.6.1",
+    "@vaadin/router": "^1.7.4",
+    "algoliasearch": "^4.12.1",
+    "cloudinary": "^1.28.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.2",
+    "jsonwebtoken": "^8.5.1",
+    "mapbox": "^1.0.0-beta10",
+    "parcel": "^2.2.1",
+    "pg": "^8.7.1",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.16.1"
+  }
+}
