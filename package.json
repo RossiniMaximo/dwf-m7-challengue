@@ -2,6 +2,7 @@
   "name": "desafio-m7",
   "version": "1.0.0",
   "license": "MIT",
+  "node": "v16.13.2",
   "scripts": {
     "dev:be": "nodemon --watch ./be-src/index.ts --exec ts-node ./be-src/index.ts",
     "dev:fe": "parcel serve ./fe-src/index.html",
