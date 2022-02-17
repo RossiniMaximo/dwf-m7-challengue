@@ -8,9 +8,6 @@ console.log(sgEmail);
 require("dotenv").config();
 sgEmail.setApiKey(process.env.SENDGRID_API_KEY);
 
-const SECRET_KEY =
-  "mecomiunasalchipapamecomiunasalchipapaayquecosatansabrozaysemeatoroenlagargantaporquenomealcanzopalagaseosa";
-
 function getSHA256ofString(password) {
   return crypto.createHash("sha256").update(password).digest("hex");
 }
@@ -67,7 +64,7 @@ export async function authToken(email, password) {
   const auth = await Auth.findOne({
     where: { email: email, password: hashedPassword },
   });
-  const token = jwt.sign({ id: auth.get("user_id") }, SECRET_KEY);
+  const token = jwt.sign({ id: auth.get("user_id") }, process.env.SECRET_KEY);
 
   if (auth) {
     return { token: token };
@@ -79,7 +76,7 @@ export async function authToken(email, password) {
 export async function myInfo(req) {
   const splittedHeader = req.headers.authorization.split(" ");
   const token = splittedHeader[1];
-  const data = jwt.verify(token, SECRET_KEY);
+  const data = jwt.verify(token, process.env.SECRET_KEY);
   return data;
 }
 
@@ -107,6 +104,6 @@ export async function sendEmail(to, from, text, subject) {
     const sendEmail = await sgEmail.send(msg);
     console.log(sendEmail);
   } catch (e) {
-    console.log("soy el error : ", e);
+    /* console.log("soy el error : ", e); */
   }
 }

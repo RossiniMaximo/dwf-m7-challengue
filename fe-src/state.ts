@@ -64,7 +64,6 @@ const state = {
       }),
     });
     const data = await res.json();
-    console.log("soy la data del sendEmail", data);
   },
   async signUp(password) {
     const cs = this.getState();
@@ -77,7 +76,7 @@ const state = {
       body: JSON.stringify({ email, fullname, password }),
     });
     const data = await res.json();
-    console.log("data del signup", data);
+    /*  console.log("data del signup", data); */
     cs.user.userId = data.id;
     this.setState(cs);
     this.createToken(password);
@@ -92,7 +91,7 @@ const state = {
       body: JSON.stringify({ email: cs.user.email }),
     });
     const data = await res.json();
-    console.log("DATA DE LOGINEMAIL ", data);
+    /* console.log("DATA DE LOGINEMAIL ", data); */
     if (data != false) {
       cs.user.fullname = data.fullname;
       cs.user.userId = data.id;
@@ -114,7 +113,7 @@ const state = {
     if (data != "Contraseña erronéa") {
       this.createToken(password);
     }
-    /* console.log("DATA del  logIn password", data); */
+    /*  console.log("DATA del  logIn password", data); */
   },
   async createToken(password) {
     const cs = this.getState();
@@ -169,9 +168,9 @@ const state = {
     });
     const data = await res.json();
     cs.user.pets.push(data.id);
-    console.log("Guardé pet id en el estado", cs);
+    /* console.log("Guardé pet id en el estado", cs); */
     this.setState(cs);
-    console.log("DATA DEL CREATE PET", data);
+    /* console.log("DATA DEL CREATE PET", data); */
   },
   async updatePet() {
     const cs = this.getState();

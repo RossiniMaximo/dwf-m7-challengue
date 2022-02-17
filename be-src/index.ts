@@ -49,7 +49,7 @@ app.post("/pet", authMiddleware, async (req, res) => {
       const newPet = await createPet(req.body);
       return res.json(newPet);
     } catch (e) {
-      return console.log("soy el error", e);
+      /* return console.log("soy el error", e); */
     }
   } else {
     return res.status(404).json("Body required");
@@ -80,7 +80,7 @@ app.put("/pet/:id", authMiddleware, async (req, res) => {
       res.status(400).json({ error: "no pet found with id provided" });
     }
   } catch (e) {
-    console.log("error endpoints update", e);
+    /*  console.log("error endpoints update", e); */
   }
 });
 
@@ -159,9 +159,6 @@ app.put("/update-user", async (req, res) => {
     const update = await updateUser(email, fullname, password);
     res.json(update);
   }
-});
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(path.join(__dirname, "../dist/index.html")));
 });
 
 app.listen(port, () => console.log("server corriendo exitosamente"));
