@@ -177,7 +177,7 @@ const state = {
   async updatePet() {
     const cs = this.getState();
     const res = await fetch(
-      "API_URL + http://localhost:3001/pet/" + cs.wantToModify,
+      API_URL + "http://localhost:3001/pet/" + cs.wantToModify,
       {
         method: "PUT",
         headers: {
@@ -280,7 +280,7 @@ const state = {
   },
   async addCard(element?, cb?) {
     const res = await fetch(
-      "API_URL + http://localhost:3001/nearby-missed-pets"
+      API_URL + "http://localhost:3001/nearby-missed-pets"
     );
     const data = await res.json();
     for (const e of data) {
@@ -296,7 +296,7 @@ const state = {
     console.log(pets);
 
     for (const pet of pets) {
-      const res = await fetch("API_URL + http://localhost:3001/pet/" + pet);
+      const res = await fetch(API_URL + "http://localhost:3001/pet/" + pet);
       const data = await res.json();
       this.myPetsCard(data, element);
     }
