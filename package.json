@@ -4,11 +4,12 @@
   "license": "MIT",
   "node": "v16.13.2",
   "scripts": {
+    "test": "ava",
     "dev:be": "nodemon --watch ./be-src/index.ts --exec ts-node ./be-src/index.ts",
     "dev:fe": "parcel serve ./fe-src/index.html",
     "build:front": "parcel build ./fe-src/index.html",
     "build:api": "tsc ./be-src/index.ts",
-    "build": "yarn build:front && yarn build:api",
+    "build": "npm run build:front && npm run build:api",
     "start": "node ./be-src/index.js",
     "sync": "ts-node ./be-src/sync.ts"
   },

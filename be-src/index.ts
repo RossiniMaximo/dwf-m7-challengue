@@ -20,6 +20,7 @@ const app = express();
 const port = process.env.PORT || 3001;
 app.use(express.json({ limit: "1000mb" }));
 app.use(cors());
+app.use(express.static("dist"));
 
 function authMiddleware(req, res, next) {
   try {
