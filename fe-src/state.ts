@@ -1,5 +1,7 @@
 import { Router } from "@vaadin/router";
 require("dotenv").config();
+const PORT = process.env.PORT || "3001";
+const API_URL = "http://localhost:" + PORT;
 const state = {
   data: {
     user: {
@@ -51,7 +53,7 @@ const state = {
   async sendEmail() {
     const cs = this.getState();
 
-    const res = await fetch("http://localhost:3001/report-info", {
+    const res = await fetch(API_URL + "/report-info", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -68,7 +70,7 @@ const state = {
   async signUp(password) {
     const cs = this.getState();
     const { email, fullname } = cs.user;
-    const res = await fetch("http://localhost:3001/auth", {
+    const res = await fetch(API_URL + "/auth", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -83,7 +85,7 @@ const state = {
   },
   async logInEmail() {
     const cs = this.getState();
-    const res = await fetch("http://localhost:3001/find-user", {
+    const res = await fetch(API_URL + "/find-user", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -102,7 +104,7 @@ const state = {
     }
   },
   async logInPassword(password) {
-    const res = await fetch("http://localhost:3001/find-password", {
+    const res = await fetch(API_URL + "/find-password", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -118,7 +120,7 @@ const state = {
   async createToken(password) {
     const cs = this.getState();
 
-    const res = await fetch("http://localhost:3001/auth/token", {
+    const res = await fetch(API_URL + "/auth/token", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -139,7 +141,7 @@ const state = {
     const fullname = cs.user.fullname;
     const email = cs.user.email;
 
-    const res = await fetch("http://localhost:3001/update-user", {
+    const res = await fetch(API_URL + "/update-user", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -152,7 +154,7 @@ const state = {
   async createPet() {
     const cs = this.getState();
 
-    const res = await fetch("http://localhost:3001/pet", {
+    const res = await fetch(API_URL + "/pet", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -174,7 +176,7 @@ const state = {
   },
   async updatePet() {
     const cs = this.getState();
-    const res = await fetch("http://localhost:3001/pet/" + cs.wantToModify, {
+    const res = await fetch(API_URL + "/pet/" + cs.wantToModify, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -274,7 +276,7 @@ const state = {
     element.appendChild(div);
   },
   async addCard(element?, cb?) {
-    const res = await fetch("http://localhost:3001/nearby-missed-pets");
+    const res = await fetch(API_URL + "/nearby-missed-pets");
     const data = await res.json();
     for (const e of data) {
       this.cardCustomizer(e, element);
