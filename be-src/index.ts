@@ -1,6 +1,8 @@
 import * as express from "express";
 import * as cors from "cors";
 import * as jwt from "jsonwebtoken";
+import * as path from "path";
+
 import { getPets } from "./controllers/pet-controller";
 import { getPet } from "./controllers/pet-controller";
 import { createPet } from "./controllers/pet-controller";
@@ -157,6 +159,9 @@ app.put("/update-user", async (req, res) => {
     const update = await updateUser(email, fullname, password);
     res.json(update);
   }
+});
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(path.join(__dirname, "../dist/index.html")));
 });
 
 app.listen(port, () => console.log("server corriendo exitosamente"));
