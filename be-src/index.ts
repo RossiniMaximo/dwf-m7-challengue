@@ -22,7 +22,6 @@ const app = express();
 const port = process.env.PORT || 3001;
 app.use(express.json({ limit: "100mb" }));
 app.use(cors());
-app.use(express.static("dist"));
 
 function authMiddleware(req, res, next) {
   try {
@@ -159,12 +158,6 @@ app.put("/update-user", async (req, res) => {
     const update = await updateUser(email, fullname, password);
     res.json(update);
   }
-});
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(path.join(__dirname, "/dist/index.html")));
-});
-app.get("/", function (req, res) {
-  res.sendFile(path.join(__dirname, "/dist/index.html"));
 });
 
 app.listen(port, () => console.log("server corriendo exitosamente", port));
