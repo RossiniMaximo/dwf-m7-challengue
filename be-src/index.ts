@@ -20,7 +20,7 @@ import { User } from "./models/user";
 
 const app = express();
 const port = process.env.PORT || 3001;
-app.use(express.json({ limit: "1000mb" }));
+app.use(express.json({ limit: "10 0mb" }));
 app.use(cors());
 app.use(express.static("dist"));
 
@@ -162,6 +162,9 @@ app.put("/update-user", async (req, res) => {
 });
 app.get("*", (req, res) => {
   res.sendFile(path.resolve(path.join(__dirname, "../../dist/index.html")));
+});
+app.get("/", function (req, res) {
+  res.sendFile(path.join(__dirname, "../dist/index.html"));
 });
 
 app.listen(port, () => console.log("server corriendo exitosamente"));
