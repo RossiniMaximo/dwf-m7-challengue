@@ -161,10 +161,10 @@ app.put("/update-user", async (req, res) => {
   }
 });
 app.get("*", (req, res) => {
-  res.sendFile(path.resolve(path.join(__dirname, "../../dist/index.html")));
+  res.sendFile(path.resolve(path.join(__dirname, "/dist/index.html")));
 });
 app.get("/", function (req, res) {
-  res.sendFile(path.join(__dirname, "../dist/index.html"));
+  res.sendFile(path.join(__dirname, "/dist/index.html"));
 });
 
 app.listen(port, () => console.log("server corriendo exitosamente", port));
