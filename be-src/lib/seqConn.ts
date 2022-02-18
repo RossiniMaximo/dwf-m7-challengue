@@ -1,4 +1,5 @@
 import { Sequelize } from "sequelize";
+require("dotenv").config();
 const sequelize = new Sequelize({
   dialect: "postgres",
   username: "pfyolxvytmtndv",

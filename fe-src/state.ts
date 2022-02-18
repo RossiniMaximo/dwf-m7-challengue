@@ -1,7 +1,6 @@
 import { Router } from "@vaadin/router";
 require("dotenv").config();
-const PORT = process.env.PORT || "3001";
-const API_URL = "http://localhost:" + PORT;
+const API_URL = process.env.DATABASE_URL || "http://localhost:3001";
 const state = {
   data: {
     user: {
@@ -291,7 +290,7 @@ const state = {
     console.log(pets);
 
     for (const pet of pets) {
-      const res = await fetch("http://localhost:3001/pet/" + pet);
+      const res = await fetch(API_URL + "/pet/" + pet);
       const data = await res.json();
       this.myPetsCard(data, element);
     }

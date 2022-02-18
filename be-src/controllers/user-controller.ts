@@ -102,7 +102,7 @@ export async function sendEmail(to, from, text, subject) {
   };
   try {
     const sendEmail = await sgEmail.send(msg);
-    console.log(sendEmail);
+    return sendEmail;
   } catch (e) {
     /* console.log("soy el error : ", e); */
   }
