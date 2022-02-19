@@ -1,1 +1,0 @@
-web : node ./be-src/index.js
