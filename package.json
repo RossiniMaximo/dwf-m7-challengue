@@ -2,19 +2,6 @@
   "name": "desafio-m7",
   "version": "1.0.0",
   "license": "MIT",
-  "engines": {
-    "node": "16.13.2"
-  },
-  "scripts": {
-    "test": "ava",
-    "dev:be": "nodemon --watch ./be-src/index.ts --exec ts-node ./be-src/index.ts",
-    "dev:fe": "parcel serve ./fe-src/index.html",
-    "build:front": "parcel build ./fe-src/index.html",
-    "build:api": "tsc ./be-src/index.ts",
-    "build": "npm run build:front && npm run build:api",
-    "start": "node ./be-src/index.js",
-    "sync": "ts-node ./be-src/sync.ts"
-  },
   "dependencies": {
     "@sendgrid/mail": "^7.6.1",
     "@types/node": "^17.0.18",
@@ -33,5 +20,15 @@
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.16.1",
     "typescript": "^4.5.5"
+  },
+  "scripts": {
+    "test": "ava",
+    "dev:be": "nodemon --watch ./be-src/index.ts --exec ts-node ./be-src/index.ts",
+    "dev:fe": "parcel serve ./fe-src/index.html",
+    "build:front": "parcel build ./fe-src/index.html",
+    "build:api": "tsc ./be-src/index.ts",
+    "build": "npm run build:front && npm run build:api",
+    "start": "node ./be-src/index.js",
+    "sync": "ts-node ./be-src/sync.ts"
   }
 }

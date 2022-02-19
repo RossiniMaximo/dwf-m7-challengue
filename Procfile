@@ -1,1 +1,1 @@
-web : node ./be-src/index.ts
+web : node ./be-src/index.js

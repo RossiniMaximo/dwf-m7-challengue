@@ -11,3 +11,4 @@ router.setRoutes([
   { path: "/report-pet", component: "report-page" },
   { path: "/my-reports", component: "my-reports" },
 ]);
+exports.module(Router);
