@@ -1,6 +1,9 @@
 {
   "name": "desafio-m7",
   "version": "1.0.0",
+  "engines": {
+    "node": "16.13.2"
+  },
   "license": "MIT",
   "dependencies": {
     "@sendgrid/mail": "^7.6.1",
