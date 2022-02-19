@@ -1,8 +1,6 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "moduleResolution": "node",
-    "outDir": "dist"
-  },
-  "files": ["./be-src/index.ts"]
+    "moduleResolution": "node"
+  }
 }
