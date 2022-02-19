@@ -18,7 +18,6 @@ class Button extends HTMLElement {
     const buttonById = this.shadow.getElementById("button");
     buttonById.style.backgroundColor = this.style.backgroundColor;
     const style = document.createElement("style");
-    /*  ESTO SE LO SAQUE AL BUTTON-CONTAINER height : 100px;*/
     style.innerHTML = `
         .button-container{
             width : 200px;

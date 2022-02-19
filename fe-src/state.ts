@@ -1,6 +1,6 @@
 import { Router } from "@vaadin/router";
 require("dotenv").config();
-const API_URL = process.env.API_URL || "http://localhost:3001";
+const API_URL = process.env.API_URL || "https://localhost:3001";
 const state = {
   data: {
     user: {
