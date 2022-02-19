@@ -2,6 +2,9 @@
   "name": "desafio-m7",
   "version": "1.0.0",
   "license": "MIT",
+  "engines": {
+    "node": "16.13.2"
+  },
   "scripts": {
     "test": "ava",
     "dev:be": "nodemon --watch ./be-src/index.ts --exec ts-node ./be-src/index.ts",
