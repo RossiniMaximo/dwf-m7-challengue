@@ -1,4 +1,3 @@
-require("dotenv").config();
 import { Router } from "@vaadin/router";
 const state = {
   data: {
