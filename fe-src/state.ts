@@ -56,6 +56,7 @@ const state = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        mode: "cors",
       },
       body: JSON.stringify({
         petId: cs.wantToReportInfo,
@@ -88,6 +89,7 @@ const state = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        mode: "cors",
       },
       body: JSON.stringify({ email: cs.user.email }),
     });
@@ -107,6 +109,7 @@ const state = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        mode: "cors",
       },
       body: JSON.stringify({ password }),
     });
@@ -123,6 +126,7 @@ const state = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        mode: "cors",
       },
       body: JSON.stringify({ email: cs.user.email, password }),
     });
@@ -144,6 +148,7 @@ const state = {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        mode: "cors",
       },
       body: JSON.stringify({ email, fullname, password }),
     });
@@ -158,6 +163,7 @@ const state = {
       headers: {
         "Content-Type": "application/json",
         Authorization: "bearer" + " " + cs.user.token.token,
+        mode: "cors",
       },
       body: JSON.stringify({
         petName: cs.pet.petName,
@@ -180,6 +186,7 @@ const state = {
       headers: {
         "Content-Type": "application/json",
         Authorization: "bearer" + " " + cs.user.token.token,
+        mode: "cors",
       },
       body: JSON.stringify({
         petName: cs.pet.petName,
