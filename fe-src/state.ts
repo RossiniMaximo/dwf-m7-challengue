@@ -116,13 +116,16 @@ const state = {
   },
   async logInPassword(password) {
     try {
-      const res = await fetch(process.env.API_URL + "/find-password", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ password }),
-      });
+      const res = await fetch(
+        /* process.env.API_URL +  */ "https://dwf-m7-challengue.herokuapp.com/find-password",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ password }),
+        }
+      );
       const data = await res.json();
       if (data != "Contraseña erronéa") {
         this.createToken(password);
