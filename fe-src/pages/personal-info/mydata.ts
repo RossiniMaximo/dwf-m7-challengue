@@ -10,7 +10,7 @@ class Misdatos extends HTMLElement {
 
     cs.pagesListeners.myDataPage = false;
     const formEl = document.querySelector(".form-my-data");
-    formEl.addEventListener("submit", (e) => {
+    formEl.addEventListener("submit", async (e) => {
       e.preventDefault();
 
       const target = e.target as any;
@@ -23,7 +23,7 @@ class Misdatos extends HTMLElement {
         this.passwordChangedSuccesfuly();
       } else {
         if (cs.loggedIn === false && password1 === password2) {
-          const createUser = state.signUp(password1);
+          const createUser: any = await state.signUp(password1);
           if (createUser) {
             cs.loggedIn = true;
             state.setState(cs);
