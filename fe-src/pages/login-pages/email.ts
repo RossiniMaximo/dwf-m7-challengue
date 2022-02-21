@@ -38,6 +38,7 @@ class LoginPage extends HTMLElement {
     style.innerHTML = `
         .login__title{
             font-size : 40px;
+            font-family : "Rowdies", cursive;
         }
         .input-container{
             margin-top : 50px;

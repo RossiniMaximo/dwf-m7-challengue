@@ -89,12 +89,13 @@ const state = {
   },
   async logInEmail() {
     const cs = this.getState();
+    console.log("soy el email del user", cs.user.email);
+
     try {
       const res = await fetch(process.env.API_URL + "/find-user", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          mode: "cors",
         },
         body: JSON.stringify({ email: cs.user.email }),
       });
@@ -118,7 +119,6 @@ const state = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          mode: "cors",
         },
         body: JSON.stringify({ password }),
       });
@@ -139,7 +139,6 @@ const state = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        mode: "cors",
       },
       body: JSON.stringify({ email: cs.user.email, password }),
     });
@@ -161,7 +160,6 @@ const state = {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        mode: "cors",
       },
       body: JSON.stringify({ email, fullname, password }),
     });
@@ -176,7 +174,6 @@ const state = {
       headers: {
         "Content-Type": "application/json",
         Authorization: "bearer" + " " + cs.user.token.token,
-        mode: "cors",
       },
       body: JSON.stringify({
         petName: cs.pet.petName,
@@ -199,7 +196,6 @@ const state = {
       headers: {
         "Content-Type": "application/json",
         Authorization: "bearer" + " " + cs.user.token.token,
-        mode: "cors",
       },
       body: JSON.stringify({
         petName: cs.pet.petName,
