@@ -9,3 +9,8 @@ User.init(
   },
   { sequelize, modelName: "user" }
 );
+
+/* export const User = sequelize.define("auth", {
+  email: DataTypes.STRING,
+  fullname: DataTypes.STRING,
+}); */
