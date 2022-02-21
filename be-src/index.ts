@@ -15,8 +15,7 @@ import { findUserByEmail } from "./controllers/user-controller";
 import { checkUserPassword } from "./controllers/user-controller";
 import { sendEmail } from "./controllers/user-controller";
 import { User } from "./models/user";
-
-/* sequelize.sync({ force: true }); */
+/* sequelize.sync({ alter: true }); */
 
 const app = express();
 const port = process.env.PORT || 3001;
