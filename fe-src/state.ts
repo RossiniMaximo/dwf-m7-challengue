@@ -104,6 +104,7 @@ const state = {
       if (data != false) {
         cs.user.fullname = data.fullname;
         cs.user.userId = data.id;
+
         state.setState(cs);
         Router.go("/login-pass");
       } else {
