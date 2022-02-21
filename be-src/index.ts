@@ -14,7 +14,7 @@ import { authToken } from "./controllers/user-controller";
 import { findUserByEmail } from "./controllers/user-controller";
 import { checkUserPassword } from "./controllers/user-controller";
 import { sendEmail } from "./controllers/user-controller";
-import { User } from "./models/user";
+import { User } from "./models/index";
 /* import { sequelize } from "./lib/seqConn";
 sequelize.sync({ force: true }); */
 

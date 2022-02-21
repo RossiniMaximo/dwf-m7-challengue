@@ -1,5 +1,5 @@
-import { Auth } from "../models/auth";
-import { User } from "../models/user";
+import { Auth } from "../models/index";
+import { User } from "../models/index";
 import * as crypto from "crypto";
 import * as jwt from "jsonwebtoken";
 const sgEmail = require("@sendgrid/mail");
