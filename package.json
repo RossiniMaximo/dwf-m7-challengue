@@ -30,5 +30,9 @@
     "build": "npm run build:front && npm run build:api",
     "start": "node ./be-src/index.js",
     "sync": "ts-node ./be-src/sync.ts"
+  },
+  "devDependencies": {
+    "os-browserify": "^0.3.0",
+    "path-browserify": "^1.0.1"
   }
 }
