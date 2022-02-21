@@ -45,6 +45,7 @@ export async function createUserAndAuth(data) {
       fullname,
     },
   });
+  console.log("soy el user ", user);
 
   const [auth, authCreated] = await Auth.findOrCreate({
     where: { user_id: user.get("id") },
