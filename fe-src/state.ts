@@ -68,55 +68,68 @@ const state = {
     const data = await res.json();
   },
   async signUp(password) {
-    const cs = this.getState();
-    const { email, fullname } = cs.user;
-    const res = await fetch(process.env.API_URL + "/auth", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, fullname, password }),
-    });
-    const data = await res.json();
-    /*  console.log("data del signup", data); */
-    cs.user.userId = data.id;
-    this.setState(cs);
-    this.createToken(password);
+    try {
+      const cs = this.getState();
+      const { email, fullname } = cs.user;
+      const res = await fetch(process.env.API_URL + "/auth", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, fullname, password }),
+      });
+      const data = await res.json();
+      /*  console.log("data del signup", data); */
+      cs.user.userId = data.id;
+      this.setState(cs);
+      this.createToken(password);
+    } catch (e) {
+      console.log("soy el error del signup", e);
+    }
   },
   async logInEmail() {
     const cs = this.getState();
-    const res = await fetch(process.env.API_URL + "/find-user", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        mode: "cors",
-      },
-      body: JSON.stringify({ email: cs.user.email }),
-    });
-    const data = await res.json();
-    /* console.log("DATA DE LOGINEMAIL ", data); */
-    if (data != false) {
-      cs.user.fullname = data.fullname;
-      cs.user.userId = data.id;
-      state.setState(cs);
-      Router.go("/login-pass");
-    } else {
-      Router.go("/my-data");
+    try {
+      const res = await fetch(process.env.API_URL + "/find-user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          mode: "cors",
+        },
+        body: JSON.stringify({ email: cs.user.email }),
+      });
+      const data = await res.json();
+      /* console.log("DATA DE LOGINEMAIL ", data); */
+      if (data != false) {
+        cs.user.fullname = data.fullname;
+        cs.user.userId = data.id;
+        state.setState(cs);
+        Router.go("/login-pass");
+      } else {
+        Router.go("/my-data");
+      }
+    } catch (e) {
+      console.log("soy el error del loginemail :", e);
     }
   },
   async logInPassword(password) {
-    const res = await fetch(process.env.API_URL + "/find-password", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        mode: "cors",
-      },
-      body: JSON.stringify({ password }),
-    });
-    const data = await res.json();
-    if (data != "Contraseña erronéa") {
-      this.createToken(password);
+    try {
+      const res = await fetch(process.env.API_URL + "/find-password", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          mode: "cors",
+        },
+        body: JSON.stringify({ password }),
+      });
+      const data = await res.json();
+      if (data != "Contraseña erronéa") {
+        this.createToken(password);
+      }
+    } catch (e) {
+      console.log("soy el error de loginpassword", e);
     }
+
     /*  console.log("DATA del  logIn password", data); */
   },
   async createToken(password) {
