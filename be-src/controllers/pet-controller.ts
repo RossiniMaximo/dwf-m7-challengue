@@ -99,7 +99,7 @@ export async function getNearbyMissedPets() {
     aroundLatLngViaIP: true,
     aroundRadius: 15000,
     headers: {
-      "X-Forwarded-For": "https://dwf-m7-challengue.herokuapp.com/",
+      "X-Forwarded-For": "https://dwf-m7-challengue.herokuapp.com",
     },
   });
   if (hits) {
