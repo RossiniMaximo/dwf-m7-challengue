@@ -1,11 +1,7 @@
 import { Model, DataTypes } from "sequelize";
 import { sequelize } from "../lib/seqConn";
 
-export class Pet extends Model {
-  constructor() {
-    super();
-  }
-}
+export class Pet extends Model {}
 Pet.init(
   {
     petName: DataTypes.STRING,
@@ -14,5 +10,5 @@ Pet.init(
     length: DataTypes.FLOAT,
     userId: DataTypes.INTEGER,
   },
-  { sequelize, modelName: "pet" }
+  { sequelize, modelName: "Pet" }
 );
