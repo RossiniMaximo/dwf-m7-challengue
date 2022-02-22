@@ -44,6 +44,7 @@ const state = {
       cb();
     }
     localStorage.setItem("user-data", JSON.stringify(newState));
+
     console.log("soy el state he cambiado", newState);
   },
   subscribe(callback: (any) => any) {

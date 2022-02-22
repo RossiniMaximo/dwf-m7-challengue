@@ -18,5 +18,7 @@ import { state } from "./state";
     const parsedData = JSON.parse(localdata);
     cs.user.token.token = parsedData.user.token.token;
     state.setState(parsedData);
+  } else {
+    state.setState(cs);
   }
 })();
