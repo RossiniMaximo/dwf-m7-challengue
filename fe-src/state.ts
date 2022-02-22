@@ -169,7 +169,6 @@ const state = {
   },
   async createPet() {
     const cs = this.getState();
-
     const res = await fetch(API_URL + "/pet", {
       method: "POST",
       headers: {
@@ -184,7 +183,11 @@ const state = {
         userId: cs.user.userId,
       }),
     });
+    console.log(res);
+
     const data = await res.json();
+    console.log(data);
+
     cs.user.pets.push(data.id);
     this.setState(cs);
   },

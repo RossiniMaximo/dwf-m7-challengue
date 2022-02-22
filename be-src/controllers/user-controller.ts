@@ -45,14 +45,13 @@ export async function createUserAndAuth(data) {
       fullname,
     },
   });
-  console.log("soy el user ", user);
-
+  const userId = user.get("id");
   const [auth, authCreated] = await Auth.findOrCreate({
-    where: { user_id: user.get("id") },
+    where: { user_id: userId },
     defaults: {
       email,
       password: getSHA256ofString(password),
-      user_id: await user.get("id"),
+      user_id: userId,
     },
   });
 
@@ -65,7 +64,8 @@ export async function authToken(email, password) {
   const auth = await Auth.findOne({
     where: { email: email, password: hashedPassword },
   });
-  const token = jwt.sign({ id: auth.get("user_id") }, process.env.SECRET_KEY);
+  const userId = auth.get("id");
+  const token = jwt.sign({ id: userId }, process.env.SECRET_KEY);
 
   if (auth) {
     return { token: token };

@@ -198,7 +198,6 @@ class ReportPage extends HTMLElement {
         cs.pet.lng = firstResult.geometry.coordinates[0];
         cs.pet.lat = firstResult.geometry.coordinates[1];
         state.setState(cs);
-        console.log("cs en mapbox times", cs);
         const marker = new mapboxgl.Marker()
           .setLngLat(firstResult.geometry.coordinates)
           .addTo(map);
