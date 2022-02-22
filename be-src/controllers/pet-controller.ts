@@ -97,10 +97,7 @@ export async function deletePet(petId) {
 export async function getNearbyMissedPets() {
   const { hits } = await indexPets.search("", {
     aroundLatLngViaIP: true,
-    aroundRadius: 15000,
-    headers: {
-      "X-Forwarded-For": "https://dwf-m7-challengue.herokuapp.com",
-    },
+    aroundRadius: 10000,
   });
   if (hits) {
     return hits;
