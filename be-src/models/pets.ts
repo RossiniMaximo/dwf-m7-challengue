@@ -1,7 +1,11 @@
 import { Model, DataTypes } from "sequelize";
 import { sequelize } from "../lib/seqConn";
 
-export class Pet extends Model {}
+export class Pet extends Model {
+  constructor() {
+    super();
+  }
+}
 Pet.init(
   {
     petName: DataTypes.STRING,
