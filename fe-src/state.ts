@@ -52,39 +52,32 @@ const state = {
   async sendEmail() {
     const cs = this.getState();
 
-    const res = await fetch(
-      "https://dwf-m7-challengue.herokuapp.com/report-info",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          mode: "cors",
-        },
-        body: JSON.stringify({
-          petId: cs.wantToReportInfo,
-          text: cs.user.sendEmail.text,
-          name: cs.user.fullname,
-          phone: cs.user.sendEmail.phone,
-        }),
-      }
-    );
+    const res = await fetch(process.env.DATABASE_URL + "/report-info", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        mode: "cors",
+      },
+      body: JSON.stringify({
+        petId: cs.wantToReportInfo,
+        text: cs.user.sendEmail.text,
+        name: cs.user.fullname,
+        phone: cs.user.sendEmail.phone,
+      }),
+    });
     const data = await res.json();
   },
   async signUp(password) {
     try {
       const cs = this.getState();
       const { email, fullname } = cs.user;
-      console.log(email, fullname);
-      const res = await fetch(
-        "https://dwf-m7-challengue.herokuapp.com/" + "auth",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, fullname, password }),
-        }
-      );
+      const res = await fetch(process.env.DATABASE_URL + "/auth", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, fullname, password }),
+      });
       const data = await res.json();
       console.log("data del signup", data);
       cs.user.userId = data.id;
@@ -99,16 +92,13 @@ const state = {
     console.log("soy el email del user", cs.user.email);
 
     try {
-      const res = await fetch(
-        "https://dwf-m7-challengue.herokuapp.com/find-user",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email: cs.user.email }),
-        }
-      );
+      const res = await fetch(process.env.DATABASE_URL + "/find-user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: cs.user.email }),
+      });
       const data = await res.json();
       /* console.log("DATA DE LOGINEMAIL ", data); */
       if (data != false) {
@@ -126,16 +116,13 @@ const state = {
   },
   async logInPassword(password) {
     try {
-      const res = await fetch(
-        /* process.env.API_URL +  */ "https://dwf-m7-challengue.herokuapp.com/find-password",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ password }),
-        }
-      );
+      const res = await fetch(process.env.DATABASE_URL + "/find-password", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ password }),
+      });
       const data = await res.json();
       if (data != "Contraseña erronéa") {
         this.createToken(password);
@@ -149,16 +136,13 @@ const state = {
   async createToken(password) {
     const cs = this.getState();
 
-    const res = await fetch(
-      "https://dwf-m7-challengue.herokuapp.com/auth/token",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email: cs.user.email, password }),
-      }
-    );
+    const res = await fetch(process.env.DATABASE_URL + "/auth/token", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email: cs.user.email, password }),
+    });
     const data = await res.json();
     /* console.log("data del createToken", data); */
     if (data) {
@@ -173,23 +157,20 @@ const state = {
     const fullname = cs.user.fullname;
     const email = cs.user.email;
 
-    const res = await fetch(
-      "https://dwf-m7-challengue.herokuapp.com/update-user",
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, fullname, password }),
-      }
-    );
+    const res = await fetch(process.env.DATABASE_URL + "/update-user", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, fullname, password }),
+    });
     const data = await res.json();
     console.log("Data del update user", data);
   },
   async createPet() {
     const cs = this.getState();
 
-    const res = await fetch("https://dwf-m7-challengue.herokuapp.com/pet", {
+    const res = await fetch(process.env.DATABASE_URL + "/pet", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -205,14 +186,12 @@ const state = {
     });
     const data = await res.json();
     cs.user.pets.push(data.id);
-    /* console.log("Guardé pet id en el estado", cs); */
     this.setState(cs);
-    /* console.log("DATA DEL CREATE PET", data); */
   },
   async updatePet() {
     const cs = this.getState();
     const res = await fetch(
-      "https://dwf-m7-challengue.herokuapp.com/pet/" + cs.wantToModify,
+      process.env.DATABASE_URL + "/pet/" + cs.wantToModify,
       {
         method: "PUT",
         headers: {
@@ -314,9 +293,7 @@ const state = {
     element.appendChild(div);
   },
   async addCard(element?, cb?) {
-    const res = await fetch(
-      "https://dwf-m7-challengue.herokuapp.com/nearby-missed-pets"
-    );
+    const res = await fetch(process.env.DATABASE_URL + "/nearby-missed-pets");
     const data = await res.json();
     for (const e of data) {
       this.cardCustomizer(e, element);
@@ -331,9 +308,7 @@ const state = {
     console.log(pets);
 
     for (const pet of pets) {
-      const res = await fetch(
-        "https://dwf-m7-challengue.herokuapp.com/pet/" + pet
-      );
+      const res = await fetch(process.env.DATABASE_URL + "/pet/" + pet);
       const data = await res.json();
       this.myPetsCard(data, element);
     }
