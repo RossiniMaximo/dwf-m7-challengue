@@ -52,7 +52,7 @@ export async function createUserAndAuth(data) {
     defaults: {
       email,
       password: getSHA256ofString(password),
-      user_id: user.get("id"),
+      user_id: await user.get("id"),
     },
   });
 
