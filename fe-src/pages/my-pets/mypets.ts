@@ -33,4 +33,4 @@ class MyPets extends HTMLElement {
     this.appendChild(div);
   }
 }
-customElements.define("my-reports", MyPets);
+customElements.define("my-pets-page", MyPets);

@@ -9,6 +9,6 @@ router.setRoutes([
   { path: "/login", component: "login-page" },
   { path: "/login-pass", component: "password-page" },
   { path: "/report-pet", component: "report-page" },
-  { path: "/my-reports", component: "my-reports" },
+  { path: "/my-reports", component: "my-pets-page" },
 ]);
 exports.module(Router);
