@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "target": "ESNext"
+    "target": "ES2016"
   }
 }
