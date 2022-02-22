@@ -74,6 +74,7 @@ const state = {
     try {
       const cs = this.getState();
       const { email, fullname } = cs.user;
+      console.log(email, fullname);
       const res = await fetch("https://dwf-m7-challengue.herokuapp.com/auth", {
         method: "POST",
         headers: {
@@ -82,7 +83,7 @@ const state = {
         body: JSON.stringify({ email, fullname, password }),
       });
       const data = await res.json();
-      /*  console.log("data del signup", data); */
+      console.log("data del signup", data);
       cs.user.userId = data.id;
       this.setState(cs);
       this.createToken(password);
