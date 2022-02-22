@@ -67,7 +67,7 @@ app.get("/pet/:id", async (req, res) => {
 });
 
 app.get("/nearby-missed-pets", async (req, res) => {
-  const nearbyPets = await getNearbyMissedPets();
+  const nearbyPets = await getNearbyMissedPets(req);
   res.json(nearbyPets);
 });
 

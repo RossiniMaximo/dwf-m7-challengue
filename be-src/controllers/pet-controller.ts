@@ -94,10 +94,13 @@ export async function deletePet(petId) {
 // LO QUE HAY QUE HACER ES USAR LA IP DEL CLIENTE PARA SACAR SU LATITUD Y LNG
 //  PERO ESTO SIRVE PARA VER QUE LAS MASCOTAS SE ESTAN CREANDO
 
-export async function getNearbyMissedPets() {
+export async function getNearbyMissedPets(request) {
   const { hits } = await indexPets.search("", {
     aroundLatLngViaIP: true,
-    aroundRadius: 10000,
+    aroundRadius: 15000,
+    headers: {
+      "X-Forwarded-For": request.socket.remoteAddress,
+    },
   });
   if (hits) {
     return hits;
