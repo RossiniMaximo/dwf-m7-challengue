@@ -71,7 +71,7 @@ const state = {
     try {
       const cs = this.getState();
       const { email, fullname } = cs.user;
-      const res = await fetch(API_URL + "auth", {
+      const res = await fetch(API_URL + "/auth", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
