@@ -6,3 +6,4 @@ dist
 yarn.lock
 package-lock.json
 index.js
+./be-src/sync-ts
