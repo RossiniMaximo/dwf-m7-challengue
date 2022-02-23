@@ -168,7 +168,7 @@ const state = {
     }
   },
   logOut() {
-    state.setState({
+    const newState = {
       user: {
         email: "",
         pets: [],
@@ -199,7 +199,9 @@ const state = {
       wantToModify: "",
       wantToReportInfo: 0,
       petOwnerEmail: "",
-    });
+    };
+    localStorage.setItem("user-data", JSON.stringify(newState));
+    state.setState(newState);
   },
   async updateUserData(password) {
     const cs = this.getState();
