@@ -57,7 +57,6 @@ const state = {
       console.log("soy la localdata", localdata);
       const parsedData = JSON.parse(localdata);
       console.log("soy la parsed data", parsedData);
-      cs.user.token.token = parsedData.user.token;
       state.setState(parsedData);
     } else {
       state.setState(cs);
