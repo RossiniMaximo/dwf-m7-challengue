@@ -35,12 +35,16 @@ class ReportPage extends HTMLElement {
     });
   }
   uploadListener() {
+    const textEl = document.querySelector(".text");
     const cs = state.getState();
     if (cs.updateClick == false) {
-      return state.createPet();
+      return state.createPet(() => {
+        textEl.textContent = "Mascota reportada!";
+      });
     } else {
-      console.log("cs a la hora del upload", cs);
-      return state.updatePet();
+      return state.updatePet(() => {
+        textEl.textContent = "Mascota actualizada!";
+      });
     }
   }
   render() {

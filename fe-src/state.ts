@@ -80,7 +80,7 @@ const state = {
     });
     const data = await res.json();
   },
-  async signUp(password) {
+  async signUp(password, cb?) {
     try {
       const cs = this.getState();
       const { email, fullname } = cs.user;
@@ -96,6 +96,9 @@ const state = {
       cs.user.userId = data.id;
       this.setState(cs);
       this.createToken(password);
+      if (cb) {
+        cb();
+      }
     } catch (e) {
       console.log("soy el error del signup", e);
     }
@@ -180,7 +183,7 @@ const state = {
     const data = await res.json();
     console.log("Data del update user", data);
   },
-  async createPet() {
+  async createPet(cb?) {
     const cs = this.getState();
     const res = await fetch(API_URL + "/pet", {
       method: "POST",
@@ -203,8 +206,11 @@ const state = {
 
     cs.user.pets.push(data.id);
     this.setState(cs);
+    if (cb) {
+      cb();
+    }
   },
-  async updatePet() {
+  async updatePet(cb?) {
     const cs = this.getState();
     const res = await fetch(API_URL + "/pet/" + cs.wantToModify, {
       method: "PUT",
@@ -222,6 +228,9 @@ const state = {
     console.log(res);
     const data = await res.json();
     console.log("DATA", data);
+    if (cb) {
+      cb();
+    }
   },
   cardCustomizer(data, element) {
     console.log("data del card customizer", data);

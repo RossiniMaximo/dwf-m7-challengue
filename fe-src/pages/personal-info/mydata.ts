@@ -4,10 +4,13 @@ class Misdatos extends HTMLElement {
     super();
   }
   connectedCallback() {
+    const div = document.createElement("div");
+    div.innerHTML = `
+      <p class="registered">Te has registrado!</p>
+    `;
     this.render();
     const cs = state.getState();
     console.log("estado en datapage", cs);
-
     cs.pagesListeners.myDataPage = false;
     const formEl = document.querySelector(".form-my-data");
     formEl.addEventListener("submit", (e) => {
@@ -23,7 +26,9 @@ class Misdatos extends HTMLElement {
         this.passwordChangedSuccesfuly();
       } else {
         if (cs.loggedIn === false && password1 === password2) {
-          const createUser = state.signUp(password1);
+          const createUser = state.signUp(password1, () => {
+            this.appendChild(div);
+          });
           if (createUser) {
             cs.loggedIn = true;
             state.setState(cs);
@@ -85,8 +90,8 @@ class Misdatos extends HTMLElement {
         Repetir contraseña
         <input class="my-data-input"  name="password2" type="text" />
         </label>
-        <div class="button-container">
-          <button>Guardar</button>
+        <div class="button-container-2">
+          <button class="button">Guardar</button>
         </div>
     `;
     const style = document.createElement("style");
@@ -127,6 +132,24 @@ class Misdatos extends HTMLElement {
         border :solid 2px;
         width : 320px;
         font-size: 16px
+      }
+      .button-container-2{
+        width: 200px;
+        margin : 0 auto;
+        margin-top : 30px;
+      }
+      .button{
+        width : 100%;
+        padding : 10px;
+        border-radius : 5px;
+        border : solid 4px;
+        background-color: antiquewhite;
+        font-family:"Rowdies", cursive;
+      }
+      .registered{
+        font-size:22px;
+        font-family:"Rowdies", cursive;
+        text-align : center;
       }
        `;
     root.appendChild(style);
