@@ -50,6 +50,19 @@ const state = {
   subscribe(callback: (any) => any) {
     this.listeners.push(callback);
   },
+  retrieveLocalData() {
+    const cs = this.getState();
+    const localdata = localStorage.getItem("user-data");
+    if (localdata) {
+      console.log("soy la localdata", localdata);
+      const parsedData = JSON.parse(localdata);
+      cs.user.token.token = parsedData.user.token.token;
+      console.log("soy la parsed data", parsedData);
+      state.setState(parsedData);
+    } else {
+      state.setState(cs);
+    }
+  },
   async sendEmail() {
     const cs = this.getState();
 

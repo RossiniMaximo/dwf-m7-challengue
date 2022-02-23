@@ -15,7 +15,11 @@
   font-size: 40px;
   font-weight: 700;
   font-family: "Rowdies", cursive;
-  color: white;
+}
+@media (min-width: 735px) {
+  .home-title {
+    color: white;
+  }
 }
 
 .text-container {
@@ -26,7 +30,11 @@
 .home-text {
   font-size: 20px;
   font-family: "Rowdies", cursive;
-  color: white;
+}
+@media (min-width: 735px) {
+  .home-text {
+    color: white;
+  }
 }
 
 .home-button-container {

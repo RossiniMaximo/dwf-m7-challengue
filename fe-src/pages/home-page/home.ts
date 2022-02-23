@@ -1,6 +1,7 @@
 import { state } from "../../state";
 const backgroundIMG = require("../../imgs/background_imgs/7.jpg");
 const bigBackgroundIMG = require("../../imgs/background_imgs/15.jpg");
+state.retrieveLocalData();
 
 class Home extends HTMLElement {
   constructor() {

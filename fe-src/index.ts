@@ -13,12 +13,5 @@ import { state } from "./state";
   const cs = state.getState();
   cs.user.token.token = localStorage.getItem("user-token");
   cs.loggedIn = false;
-  const localdata = localStorage.getItem("user-data");
-  if (localdata) {
-    const parsedData = JSON.parse(localdata);
-    cs.user.token.token = parsedData.user.token.token;
-    state.setState(parsedData);
-  } else {
-    state.setState(cs);
-  }
+  /* state.retrieveLocalData(); */
 })();
