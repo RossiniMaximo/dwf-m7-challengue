@@ -8,10 +8,4 @@ import "./pages/login-pages/password";
 import "./pages/report-page/report";
 import "./pages/my-pets/mypets";
 import "./router";
-import { state } from "./state";
-(function () {
-  const cs = state.getState();
-  cs.user.token.token = localStorage.getItem("user-token");
-  cs.loggedIn = false;
-  /* state.retrieveLocalData(); */
-})();
+(function () {})();
