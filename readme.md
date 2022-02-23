@@ -8,6 +8,5 @@ Permite localizar mascotas dentro de un radio de 15km.
 
 Detalles a tener en cuenta :
 
-No esta muy trabajado el front-end , no le puse ninguna señal que te diga que
-te haz registrado o logeado , lo mismo a la hora de reportar una mascota.
-Voy a tratar de agregarlo estos dias.
+Las creaciones y registros  deberían de mostrar un texto emergente avisando de la 
+optima creación/actualización del usuario/mascota.
