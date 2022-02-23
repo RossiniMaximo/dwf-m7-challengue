@@ -167,6 +167,40 @@ const state = {
       state.setState(cs);
     }
   },
+  logOut() {
+    state.setState({
+      user: {
+        email: "",
+        pets: [],
+        token: "",
+        userId: 0,
+        fullname: "",
+        sendEmail: {
+          text: "",
+          phone: "",
+          name: "",
+        },
+      },
+      pet: {
+        petName: "",
+        lat: undefined,
+        lng: undefined,
+        img: "",
+      },
+      pagesListeners: {
+        reportPage: false,
+        myDataPage: false,
+        myPetsPage: false,
+      },
+      reportClick: "false",
+      forgotPassword: "false",
+      updateClick: false,
+      loggedIn: false,
+      wantToModify: "",
+      wantToReportInfo: 0,
+      petOwnerEmail: "",
+    });
+  },
   async updateUserData(password) {
     const cs = this.getState();
     console.log("cs en update", cs);

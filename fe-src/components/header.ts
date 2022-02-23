@@ -70,8 +70,7 @@ class Header extends HTMLElement {
     });
     const logOutBtn = this.shadow.querySelector("#log-out");
     logOutBtn.addEventListener("click", () => {
-      cs.loggedIn = false;
-      state.setState(cs);
+      state.logOut();
     });
   }
   render() {
