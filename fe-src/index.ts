@@ -8,4 +8,13 @@ import "./pages/login-pages/password";
 import "./pages/report-page/report";
 import "./pages/my-pets/mypets";
 import "./router";
-(function () {})();
+import { state } from "./state";
+import { Router } from "@vaadin/router";
+(function () {
+  const cs = state.getState();
+  state.subscribe(() => {
+    if (cs.user.email == "") {
+      Router.go("/my-data");
+    }
+  });
+})();

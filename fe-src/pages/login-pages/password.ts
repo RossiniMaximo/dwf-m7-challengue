@@ -35,7 +35,7 @@ class PasswordPage extends HTMLElement {
         <h2 class="pass-title">Ingresar</h2>
         <div class="input-container">
         <label class="login-input__label">Contraseña</label>
-            <input class="login-input" type="text" name="password" />
+            <input class="login-input" type="password" name="password" />
         </div>
         <div class="email-btn">
           <button class="login-form__button">siguiente</button>

@@ -5,6 +5,7 @@ import * as path from "path";
 
 import { getPets } from "./controllers/pet-controller";
 import { getPet } from "./controllers/pet-controller";
+import { getUserPets } from "./controllers/pet-controller";
 import { createPet } from "./controllers/pet-controller";
 import { updatePet } from "./controllers/pet-controller";
 import { getNearbyMissedPets } from "./controllers/pet-controller";
@@ -64,6 +65,11 @@ app.get("/pets", async (req, res) => {
 app.get("/pet/:id", async (req, res) => {
   const pet = await getPet(req.params.id);
   res.json(pet);
+});
+
+app.post("/user-pets", async (req, res) => {
+  const pets = await getUserPets(req.body.userId);
+  res.json(pets);
 });
 
 app.get("/nearby-missed-pets", async (req, res) => {

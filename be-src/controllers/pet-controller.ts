@@ -38,6 +38,11 @@ export async function getPets() {
   return pets;
 }
 
+export async function getUserPets(userId) {
+  const userPets = await Pet.findAll({ where: { userId } });
+  return userPets;
+}
+
 export async function getPet(petId) {
   const pet = await Pet.findByPk(petId);
   if (pet) {

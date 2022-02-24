@@ -200,7 +200,7 @@ const state = {
       wantToReportInfo: 0,
       petOwnerEmail: "",
     };
-    localStorage.setItem("user-data", JSON.stringify(newState));
+    localStorage.clear();
     state.setState(newState);
   },
   async updateUserData(password) {
@@ -362,16 +362,21 @@ const state = {
   },
   async addMyPetCard(element?) {
     const cs = this.getState();
-    const pets = cs.user.pets;
-    console.log(pets);
-
-    for (const pet of pets) {
-      const res = await fetch(API_URL + "/pet/" + pet);
-      const data = await res.json();
-      this.myPetsCard(data, element);
+    const res = await fetch(API_URL + "/user-pets", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userId: cs.user.userId }),
+    });
+    const data = await res.json();
+    for (const pet of data) {
+      this.myPetsCard(pet, element);
     }
   },
   myPetsCard(data, element) {
+    console.log("data que llega a mypetscard", data);
+
     const div = document.createElement("div");
     div.className = "pet-content-container";
     div.innerHTML = ` 

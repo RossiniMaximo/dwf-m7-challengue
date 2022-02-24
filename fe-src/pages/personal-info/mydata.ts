@@ -84,11 +84,11 @@ class Misdatos extends HTMLElement {
         <div class="br">
         <label class="mydata-label">
         Contraseña
-        <input class="my-data-input" name="password1" type="text" />
+        <input class="my-data-input" name="password1" type="password" />
         </label>
         <label class="mydata-label">
         Repetir contraseña
-        <input class="my-data-input"  name="password2" type="text" />
+        <input class="my-data-input"  name="password2" type="password" />
         </label>
         <div class="button-container-2">
           <button class="button">Guardar</button>

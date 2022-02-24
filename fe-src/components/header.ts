@@ -40,7 +40,6 @@ class Header extends HTMLElement {
     if (mydataEl) {
       mydataEl.addEventListener("click", () => {
         cs.pagesListeners.myDataPage = true;
-        state.setState(cs);
         if (cs.loggedIn == true) {
           Router.go("/my-data");
         } else {
@@ -51,7 +50,6 @@ class Header extends HTMLElement {
     const myPetsEl = this.shadow.querySelector(".my-pets");
     myPetsEl.addEventListener("click", (e) => {
       cs.pagesListeners.myPetsPage = true;
-      state.setState(cs);
       if (cs.loggedIn == true) {
         Router.go("/my-reports");
       } else {
@@ -61,7 +59,6 @@ class Header extends HTMLElement {
     const reportPage = this.shadow.querySelector(".pets-report-page");
     reportPage.addEventListener("click", () => {
       cs.pagesListeners.reportPage = true;
-      state.setState(cs);
       if (cs.loggedIn == true) {
         Router.go("/report-pet");
       } else {
