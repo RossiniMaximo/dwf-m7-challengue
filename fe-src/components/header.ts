@@ -68,6 +68,7 @@ class Header extends HTMLElement {
     const logOutBtn = this.shadow.querySelector("#log-out");
     logOutBtn.addEventListener("click", () => {
       state.logOut();
+      Router.go("/home");
     });
   }
   render() {
