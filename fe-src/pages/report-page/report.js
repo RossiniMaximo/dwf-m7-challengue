@@ -23,6 +23,7 @@ class ReportPage extends HTMLElement {
     myDropZone.on("addedfile", function (file) {
       pictureFile = file;
     });
+    this.deletePetIcon();
     const formEl = document.querySelector(".form");
     formEl.addEventListener("submit", (e) => {
       e.preventDefault();
@@ -42,9 +43,37 @@ class ReportPage extends HTMLElement {
         textEl.textContent = "Mascota reportada!";
       });
     } else {
-      return state.updatePet(() => {
+      state.updatePet(() => {
         textEl.textContent = "Mascota actualizada!";
       });
+    }
+  }
+  deletePetIcon() {
+    console.log("entre al deletepeticon");
+    const cs = state.getState();
+    const div = document.createElement("div");
+    div.innerHTML = `
+      <p class="delete-pet">Eliminar</p>
+    `;
+    const style = document.createElement("style");
+    style.innerHTML = `
+    .delete-pet{
+      font-size : 16px;
+      font-family : "Rowdies", cursive;
+      background-color: lightblue;
+      padding : 10px;
+      max-width : 100px;
+      margin : 0 auto;
+      margin-top : 20px;
+      border : solid 2px;
+    }
+    `;
+    div.addEventListener("click", () => {
+      state.deletePet();
+    });
+    div.appendChild(style);
+    if (cs.updateClick == true) {
+      this.appendChild(div);
     }
   }
   render() {

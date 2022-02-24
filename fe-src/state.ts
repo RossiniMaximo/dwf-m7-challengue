@@ -268,6 +268,18 @@ const state = {
       cb();
     }
   },
+  async deletePet() {
+    const cs = this.getState();
+    console.log(cs.wantToModify);
+    const resFromDeletePet = await fetch(API_URL + "/pet/" + cs.wantToModify, {
+      method: "DELETE",
+      headers: {
+        Authorization: "bearer" + " " + cs.user.token.token,
+      },
+    });
+    const data = await resFromDeletePet.json();
+    console.log("data del deletePet", data);
+  },
   cardCustomizer(data, element) {
     console.log("data del card customizer", data);
 
@@ -397,8 +409,6 @@ const state = {
     linkEl.addEventListener("click", (e) => {
       cs.petName = data.petName;
       cs.wantToModify = data.id;
-      console.log(data);
-
       cs.updateClick = true;
       state.setState(cs);
       Router.go("/report-pet");
