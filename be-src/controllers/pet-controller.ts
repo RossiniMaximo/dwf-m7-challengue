@@ -112,9 +112,9 @@ export async function getNearbyMissedPets(request) {
   const { hits } = await indexPets.search("", {
     aroundLatLngViaIP: true,
     aroundRadius: 15000,
-    /* headers: {
+    headers: {
       "X-Forwarded-For": request.socket.remoteAddress,
-    }, */
+    },
   });
   console.log("hits", hits);
   if (hits) {
