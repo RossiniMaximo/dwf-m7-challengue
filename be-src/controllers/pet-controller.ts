@@ -5,40 +5,43 @@ import { indexPets } from "../lib/algolia";
 
 export async function createPet(body) {
   console.log("body en create pet", body);
-
-  let imgHolder;
-  if (body.pet.img) {
-    const resImg = await cloudinary.uploader.upload(body.pet.img, {
-      resource_type: "image",
-      discard_original_filename: true,
-      width: 1000,
+  try {
+    let imgHolder;
+    if (body.pet.img) {
+      const resImg = await cloudinary.uploader.upload(body.pet.img, {
+        resource_type: "image",
+        discard_original_filename: true,
+        width: 1000,
+      });
+      /* console.log("resimg", resImg); */
+      imgHolder = resImg.secure_url;
+      /* console.log("imgHolder", imgHolder); */
+    }
+    const pet = await Pet.create({
+      petName: body.pet.petName,
+      latitude: body.pet.lat,
+      length: body.pet.length,
+      imgURL: imgHolder,
+      userId: body.userId,
     });
-    /* console.log("resimg", resImg); */
-    imgHolder = resImg.secure_url;
-    /* console.log("imgHolder", imgHolder); */
-  }
-  const pet = await Pet.create({
-    petName: body.pet.petName,
-    latitude: body.pet.lat,
-    length: body.pet.length,
-    imgURL: imgHolder,
-    userId: body.userId,
-  });
-  const savePetInAlgolia = await indexPets.saveObject({
-    objectID: pet.get("id"),
-    petName: pet.get("petName"),
-    imgURL: pet.get("imgURL"),
-    _geoloc: {
-      lat: pet.get("latitude"),
-      lng: pet.get("length"),
-    },
-  });
-  console.log("save pet in algolia", savePetInAlgolia);
+    const savePetInAlgolia = await indexPets.saveObject({
+      objectID: pet.get("id"),
+      petName: pet.get("petName"),
+      imgURL: pet.get("imgURL"),
+      _geoloc: {
+        lat: pet.get("latitude"),
+        lng: pet.get("length"),
+      },
+    });
+    console.log("save pet in algolia", savePetInAlgolia);
 
-  if (pet) {
-    return pet;
-  } else {
-    return false;
+    if (pet) {
+      return pet;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    console.error("error en createPet,error :", error);
   }
 }
 
