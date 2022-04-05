@@ -4,23 +4,26 @@ import { Pet } from "../models/index";
 import { indexPets } from "../lib/algolia";
 
 export async function createPet(body) {
+  console.log("body en create pet", body);
+
   let imgHolder;
-  if (body.imgURL) {
-    const resImg = await cloudinary.uploader.upload(body.imgURL, {
+  if (body.pet.img) {
+    const resImg = await cloudinary.uploader.upload(body.pet.img, {
       resource_type: "image",
       discard_original_filename: true,
       width: 1000,
     });
+    /* console.log("resimg", resImg); */
     imgHolder = resImg.secure_url;
+    /* console.log("imgHolder", imgHolder); */
   }
   const pet = await Pet.create({
-    petName: body.petName,
-    latitude: body.latitude,
-    length: body.length,
+    petName: body.pet.petName,
+    latitude: body.pet.lat,
+    length: body.pet.length,
     imgURL: imgHolder,
     userId: body.userId,
   });
-
   const savePetInAlgolia = await indexPets.saveObject({
     objectID: pet.get("id"),
     petName: pet.get("petName"),
@@ -30,7 +33,13 @@ export async function createPet(body) {
       lng: pet.get("length"),
     },
   });
-  return pet;
+  console.log("save pet in algolia", savePetInAlgolia);
+
+  if (pet) {
+    return pet;
+  } else {
+    return false;
+  }
 }
 
 export async function getPets() {
@@ -68,6 +77,7 @@ function bodyFormated(body, id?) {
 
 export async function updatePet(data, petId) {
   console.log("pet id en pet-controller", petId);
+  console.log("data en pet-controller", data);
 
   try {
     const updatePet = await Pet.update(data, { where: { id: petId } });
@@ -99,10 +109,11 @@ export async function getNearbyMissedPets(request) {
   const { hits } = await indexPets.search("", {
     aroundLatLngViaIP: true,
     aroundRadius: 15000,
-    headers: {
+    /* headers: {
       "X-Forwarded-For": request.socket.remoteAddress,
-    },
+    }, */
   });
+  console.log("hits", hits);
   if (hits) {
     return hits;
   }

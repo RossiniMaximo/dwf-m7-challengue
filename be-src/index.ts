@@ -16,19 +16,29 @@ import { findUserByEmail } from "./controllers/user-controller";
 import { checkUserPassword } from "./controllers/user-controller";
 import { sendEmail } from "./controllers/user-controller";
 import { User } from "./models/index";
-/* import { sequelize } from "./lib/seqConn";
-sequelize.sync({ force: true }); */
+import { sequelize } from "./lib/seqConn";
+/* sequelize.sync({ force: true }); */
 
 const app = express();
-const port = process.env.PORT || 3001;
+const port = 3001;
 app.use(express.json({ limit: "100mb" }));
-app.use(cors());
 app.use(express.static("dist"));
+const allowedHosts = ["https://dwf-m8-challenge.firebaseapp.com/"];
+
+app.use(
+  cors({
+    origin: allowedHosts,
+  })
+);
 
 function authMiddleware(req, res, next) {
   try {
     const splittedHeader = req.headers.authorization.split(" ");
+    console.log("splitteadHeader", splittedHeader);
+
     const token = splittedHeader[1];
+    console.log("Splitted token", token);
+
     const data = jwt.verify(token, process.env.SECRET_KEY);
     req._userId = data;
     next();
@@ -45,12 +55,12 @@ function authMiddleware(req, res, next) {
 app.post("/pet", authMiddleware, async (req, res) => {
   if (req.body) {
     console.log("soy el req.body", req.body);
-    console.log("soy el req._userId", req._userId);
     try {
       const newPet = await createPet(req.body);
+      console.log("newPet", newPet);
       return res.json(newPet);
     } catch (e) {
-      /* return console.log("soy el error", e); */
+      return console.log("soy el error", e);
     }
   } else {
     return res.status(404).json("Body required");
@@ -81,6 +91,8 @@ app.put("/pet/:id", authMiddleware, async (req, res) => {
   try {
     if (req.body) {
       const updatedPet = await updatePet(req.body, req.params.id);
+      console.log("updatedPet", updatedPet);
+
       res.json(updatedPet);
     } else {
       res.status(400).json({ error: "no pet found with id provided" });
@@ -101,6 +113,11 @@ app.delete("/pet/:id", authMiddleware, async (req, res) => {
 
 // User's endpoints
 
+app.get("/users", async (req, res) => {
+  const usersList = await User.findAll({});
+  res.json(usersList);
+});
+
 app.post("/find-user", async (req, res) => {
   if (req.body === null) {
     res.json("Body inexistente");
@@ -113,6 +130,7 @@ app.post("/find-user", async (req, res) => {
 app.post("/find-password", async (req, res) => {
   const { password } = req.body;
   if (req.body) {
+    console.log("body", req.body);
     const auth = await checkUserPassword(password);
     res.json(auth);
   }
@@ -122,13 +140,17 @@ app.post("/auth", async (req, res) => {
   if (!req.body) {
     res.status(400).json({ error: true });
   } else {
+    console.log("req.body", req.body);
+
     const user = await createUserAndAuth(req.body);
     res.json(user);
   }
 });
 
 app.post("/auth/token", async (req, res) => {
+  console.log(req.body);
   const { email, password } = req.body;
+
   if (email && password) {
     const response = await authToken(email, password);
     res.json(response);
@@ -138,10 +160,14 @@ app.post("/auth/token", async (req, res) => {
 });
 
 app.post("/report-info", async (req, res) => {
-  const { petId, text, name, phone } = req.body;
+  const { petId, text, name, phone } = req.body.pet;
   const pet = await getPet(petId);
+  console.log("petId", petId);
+
   const userId = pet["userId"];
   const petOwner = await User.findByPk(userId);
+  console.log("petOwner", petOwner);
+
   const ownerEmail = petOwner["email"];
 
   const from = "maximorossini2016@gmail.com";
@@ -158,7 +184,8 @@ app.post("/report-info", async (req, res) => {
 });
 
 app.put("/update-user", async (req, res) => {
-  const { email, fullname, password } = req.body;
+  const { email, fullname, password } = req.body.data;
+
   if (!req.body) {
     res.json({ error: "Body incompleto" });
   } else {

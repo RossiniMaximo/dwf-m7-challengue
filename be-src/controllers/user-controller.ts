@@ -3,7 +3,7 @@ import { User } from "../models/index";
 import * as crypto from "crypto";
 import * as jwt from "jsonwebtoken";
 const sgEmail = require("@sendgrid/mail");
-console.log(sgEmail);
+/* console.log(sgEmail); */
 
 require("dotenv").config();
 sgEmail.setApiKey(process.env.SENDGRID_API_KEY);
@@ -35,7 +35,12 @@ export async function checkUserPassword(password) {
 
 // Create user & auth on their tables.
 export async function createUserAndAuth(data) {
-  const { email, fullname, password } = data;
+  /*  console.log("data que llega al createUserAndAuth", data);
+  console.log("data.user.email", data.user.email);
+  console.log("data.password", data.password); */
+  console.log("data que llega a  createUserAndAuth", data);
+  const { email, fullname } = data.user;
+  const { password } = data;
   const [user, created] = await User.findOrCreate({
     where: {
       email,
@@ -45,7 +50,12 @@ export async function createUserAndAuth(data) {
       fullname,
     },
   });
+  console.log("user", user);
+
   const userId = user.get("id");
+
+  console.log("ID DEL USUARIO", userId);
+
   const [auth, authCreated] = await Auth.findOrCreate({
     where: { user_id: userId },
     defaults: {
