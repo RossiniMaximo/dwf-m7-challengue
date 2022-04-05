@@ -23,7 +23,7 @@ const app = express();
 const port = 3001;
 app.use(express.json({ limit: "100mb" }));
 app.use(express.static("dist"));
-const allowedHosts = ["https://dwf-m8-challenge.firebaseapp.com/"];
+const allowedHosts = ["https://dwf-m8-challenge.firebaseapp.com"];
 
 app.use(
   cors({
