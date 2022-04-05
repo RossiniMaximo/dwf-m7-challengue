@@ -21,7 +21,7 @@ import { sequelize } from "./lib/seqConn";
 
 const app = express();
 const port = 3001;
-const allowedHosts = ["https://dwf-m8-challenge.firebaseapp.com"];
+const allowedHosts = "https://dwf-m8-challenge.firebaseapp.com";
 app.use(
   cors({
     origin: allowedHosts,
