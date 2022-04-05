@@ -19,17 +19,16 @@ import { User } from "./models/index";
 import { sequelize } from "./lib/seqConn";
 /* sequelize.sync({ force: true }); */
 
+const allowedHosts = ["https://dwf-m8-challenge.firebaseapp.com/"];
 const app = express();
 const port = 3001;
-app.use(express.json({ limit: "100mb" }));
-app.use(express.static("dist"));
-const allowedHosts = ["https://dwf-m8-challenge.firebaseapp.com"];
-
 app.use(
   cors({
-    origin: "https://dwf-m8-challenge.firebaseapp.com",
+    origin: allowedHosts,
   })
 );
+app.use(express.json({ limit: "100mb" }));
+app.use(express.static("dist"));
 
 function authMiddleware(req, res, next) {
   try {
