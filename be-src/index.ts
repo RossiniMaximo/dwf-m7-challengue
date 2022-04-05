@@ -27,7 +27,7 @@ const allowedHosts = ["https://dwf-m8-challenge.firebaseapp.com"];
 
 app.use(
   cors({
-    origin: allowedHosts,
+    origin: "https://dwf-m8-challenge.firebaseapp.com",
   })
 );
 
