@@ -19,9 +19,9 @@ import { User } from "./models/index";
 import { sequelize } from "./lib/seqConn";
 /* sequelize.sync({ force: true }); */
 
-const allowedHosts = ["https://dwf-m8-challenge.firebaseapp.com/"];
 const app = express();
 const port = 3001;
+const allowedHosts = ["https://dwf-m8-challenge.firebaseapp.com"];
 app.use(
   cors({
     origin: allowedHosts,
