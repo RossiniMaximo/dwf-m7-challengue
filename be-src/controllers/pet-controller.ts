@@ -2,6 +2,7 @@
 import { cloudinary } from "../lib/cloudinary";
 import { Pet } from "../models/index";
 import { indexPets } from "../lib/algolia";
+import publicIp from "public-ip";
 
 export async function createPet(body) {
   console.log("body en create pet", body);
@@ -113,6 +114,7 @@ export async function getNearbyMissedPets(request) {
   const { hits } = await indexPets.search("", {
     aroundLatLngViaIP: true,
     aroundRadius: 15000,
+    "X-Forwarded-For": await publicIp.v4(),
   });
   console.log("hits", hits);
   if (hits) {
