@@ -111,10 +111,11 @@ export async function deletePet(petId) {
 }
 
 export async function getNearbyMissedPets(request) {
+  const ip = await publicIp.v4();
   const { hits } = await indexPets.search("", {
     aroundLatLngViaIP: true,
     aroundRadius: 15000,
-    "X-Forwarded-For": await publicIp.v4(),
+    "X-Forwarded-For": ip,
   });
   console.log("hits", hits);
   if (hits) {
