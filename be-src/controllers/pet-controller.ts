@@ -104,6 +104,7 @@ export async function deletePet(petId) {
   const petToDelete = await Pet.findByPk(petId);
   if (petToDelete) {
     petToDelete.destroy();
+    indexPets.deleteObject(petId);
     return "pet deleted succesfully";
   }
 }
@@ -112,9 +113,6 @@ export async function getNearbyMissedPets(request) {
   const { hits } = await indexPets.search("", {
     aroundLatLngViaIP: true,
     aroundRadius: 15000,
-    headers: {
-      "X-Forwarded-For": request.socket.remoteAddress,
-    },
   });
   console.log("hits", hits);
   if (hits) {
