@@ -22,7 +22,10 @@ import { sequelize } from "./lib/seqConn";
 const app = express();
 const port = process.env.PORT || 3001;
 
-const allowedHosts = "https://dwf-m8-challenge.firebaseapp.com";
+const allowedHosts = [
+  "https://dwf-m8-challenge.firebaseapp.com",
+  "https://geolocation-db.com/json/0f761a30-fe14-11e9-b59f-e53803842572",
+];
 app.use(cors());
 app.use(
   cors({
