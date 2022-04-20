@@ -86,7 +86,7 @@ app.post("/user-pets", async (req, res) => {
   res.json(pets);
 });
 
-app.get("/nearby-missed-pets", async (req, res) => {
+app.post("/nearby-missed-pets", async (req, res) => {
   const nearbyPets = await getNearbyMissedPets(req.body);
   res.json(nearbyPets);
 });
