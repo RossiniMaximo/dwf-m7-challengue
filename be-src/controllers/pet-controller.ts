@@ -118,13 +118,14 @@ export async function getNearbyMissedPets(request) {
   const lng = data.longitude;
   console.log(lat);
   console.log(lng);
-
-  const { hits } = await indexPets.search("", {
-    aroundLatLng: lat + "," + lng,
-    aroundRadius: 10000,
-  });
-  console.log("hits", hits);
-  if (hits) {
-    return hits;
+  if (data) {
+    const { hits } = await indexPets.search("", {
+      aroundLatLng: lat + "," + lng,
+      aroundRadius: 10000,
+    });
+    console.log("hits", hits);
+    if (hits) {
+      return hits;
+    }
   }
 }
