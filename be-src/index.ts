@@ -23,6 +23,7 @@ const app = express();
 const port = process.env.PORT || 3001;
 
 const allowedHosts = "https://dwf-m8-challenge.firebaseapp.com";
+app.use(cors());
 app.use(
   cors({
     origin: allowedHosts,
