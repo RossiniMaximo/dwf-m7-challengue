@@ -2,7 +2,7 @@
 import { cloudinary } from "../lib/cloudinary";
 import { Pet } from "../models/index";
 import { indexPets } from "../lib/algolia";
-import publicIp from "public-ip";
+import fetch from "cross-fetch";
 
 export async function createPet(body) {
   console.log("body en create pet", body);
@@ -14,9 +14,8 @@ export async function createPet(body) {
         discard_original_filename: true,
         width: 1000,
       });
-      /* console.log("resimg", resImg); */
+
       imgHolder = resImg.secure_url;
-      /* console.log("imgHolder", imgHolder); */
     }
     const pet = await Pet.create({
       petName: body.pet.petName,
@@ -111,11 +110,17 @@ export async function deletePet(petId) {
 }
 
 export async function getNearbyMissedPets(request) {
-  const ip = await publicIp.v4();
+  const res = await fetch(
+    "https://geolocation-db.com/json/0f761a30-fe14-11e9-b59f-e53803842572"
+  );
+  const data = await res.json();
+  console.log("data de fetch :", data);
+
+  const lat = data.latitude;
+  const lng = data.longitude;
   const { hits } = await indexPets.search("", {
-    aroundLatLngViaIP: true,
+    aroundLatLng: lat + "," + lng,
     aroundRadius: 15000,
-    "X-Forwarded-For": request.connection.socket.remoteAddress,
   });
   console.log("hits", hits);
   if (hits) {
