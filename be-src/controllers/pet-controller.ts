@@ -109,23 +109,15 @@ export async function deletePet(petId) {
   }
 }
 
-export async function getNearbyMissedPets(request) {
-  const res = await fetch(
-    "https://geolocation-db.com/json/0f761a30-fe14-11e9-b59f-e53803842572"
-  );
-  const data = await res.json();
-  const lat = data.latitude;
-  const lng = data.longitude;
-  console.log(lat);
-  console.log(lng);
-  if (data) {
-    const { hits } = await indexPets.search("", {
-      aroundLatLng: lat + "," + lng,
-      aroundRadius: 10000,
-    });
-    console.log("hits", hits);
-    if (hits) {
-      return hits;
-    }
+export async function getNearbyMissedPets(body) {
+  const { lat, lng } = body;
+
+  const { hits } = await indexPets.search("", {
+    aroundLatLng: lat + "," + lng,
+    aroundRadius: 10000,
+  });
+  console.log("hits", hits);
+  if (hits) {
+    return hits;
   }
 }
